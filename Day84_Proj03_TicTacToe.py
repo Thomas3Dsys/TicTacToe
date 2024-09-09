@@ -88,16 +88,26 @@ board = [
 def draw_board():
     """ Clears the screen and draws the players character symbol if a non-zero (blank) value exists in the board matrix"""
     os.system('cls')
-    for row in board:
-        print("")
-        for value in row:
-            if value == 0:
-                print ("_", end="")
-            elif value == 1:
-                print("O", end="")
-            elif value == 2:
-                print("X", end="")
-    print("")
+
+    cb = [] # Character Board stores values converted from index to the character symbol
+    for x in range(0,3):
+        row_list = []
+        for y in range(0,3):
+            if board[x][y] == 0:
+                row_list.append(" ")
+            elif board[x][y] == players[0][0]:
+                row_list.append(players[0][1])
+            elif board[x][y] == players[1][0]:
+                row_list.append(players[1][1])
+                
+        cb.append(row_list)
+    
+    #Draw the converted board with dividers
+    print(f"{cb[0][0]} | {cb[0][1]} | {cb[0][2]}")
+    print("----------")
+    print(f"{cb[1][0]} | {cb[1][1]} | {cb[1][2]}")
+    print("----------")
+    print(f"{cb[2][0]} | {cb[2][1]} | {cb[2][2]}")
 
 valid_move = False # controls the player input while look
 players = [(1, "0"), (2, "X")] #look up of player character symbol based on index
